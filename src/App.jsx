@@ -1,4 +1,5 @@
 import './App.css'
+import Crud from './components/Crud'
 import PropsExample from './components/PropsExample'
 import StateExample from './components/StateExample'
 
@@ -33,7 +34,8 @@ function App() {
         ))
       } */}
       {/* simple crud  */}
-      <StateExample/>
+      {/* <StateExample/> */}
+      <Crud/>
     </div>
   )
 }
