@@ -1,7 +1,7 @@
 import React from 'react'
 
 const RenderNotes = (props) => {
-    const { notes, handleDeleteNote, handleUpdateNote } = props;
+    const { notes, handleDeleteNote, handleEditableNote } = props;
 
     const handleDelete = (id) => {
         // console.log("id", id)
@@ -9,7 +9,7 @@ const RenderNotes = (props) => {
     }
 
     const handleUpdate = (note) => {
-        handleUpdateNote(note);
+        handleEditableNote(note);
     }
     return (
         <div style={{

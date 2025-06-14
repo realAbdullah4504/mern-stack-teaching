@@ -1,6 +1,7 @@
 import './App.css'
 import Crud from './components/Crud'
 import PropsExample from './components/PropsExample'
+import ReactElements from './components/ReactElements'
 import StateExample from './components/StateExample'
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
       {/* simple crud  */}
       {/* <StateExample/> */}
       <Crud/>
+      {/* <ReactElements/> */}
     </div>
   )
 }
