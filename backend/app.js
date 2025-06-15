@@ -12,9 +12,69 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+const notes = [
+    {
+        id: 0,
+        title: "Note 1",
+        description: "This is note 1",
+    },
+    {
+        id: 1,
+        title: "Note 2",
+        description: "This is note 2",
+    },
+    {
+        id: 2,
+        title: "Note 3",
+        description: "This is note 3",
+    },
+];
+// there are the 3 things which we can send from the postman request
+//req.query,req.params,req.body
+// you need to make the query in the get request and only show the note which we query  
 app.get("/", (req, res) => {
-    res.send("hello from node js")
+    console.log(req.query, "params")
+    res.send(notes)
 })
+
+app.post("/", (req, res) => {
+    // console.log("request", req)
+    const title = req.body.title;
+    const description = req.body.description;
+    const addNote = { id: notes.length + 1, title, description }
+    notes.push(addNote)
+    res.json(notes)
+})
+
+app.put("/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    console.log("id", id)
+    const title = req.body.title;
+    const description = req.body.description;
+
+
+    const updateNotes = notes.map((note) => {
+        if (note.id === id) {
+            note.title = title,
+                note.description = description
+        }
+        return note
+    })
+
+    console.log("updated notes", updateNotes)
+    res.json(updateNotes)
+})
+
+app.delete("/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const filteredNotes = notes.filter((note) => note.id !== id);
+
+    notes.length = 0;
+    notes.push(...filteredNotes);
+
+    res.json(notes)
+})
+
 
 const PORT = 3000;
 app.listen(PORT, () => {
