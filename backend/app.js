@@ -33,8 +33,15 @@ const notes = [
 //req.query,req.params,req.body
 // you need to make the query in the get request and only show the note which we query  
 app.get("/", (req, res) => {
-    console.log(req.query, "params")
-    res.send(notes)
+    console.log("query", req.query)
+    const id = parseInt(req.query.id);
+    let filteredNotes = [];
+    if (id)
+        filteredNotes = notes.filter(note => note.id === id)
+    else
+        filteredNotes = notes
+    // const filteredNotes=id ? notes.filter(note=>note.id===id) : notes
+    res.send(filteredNotes)
 })
 
 app.post("/", (req, res) => {
