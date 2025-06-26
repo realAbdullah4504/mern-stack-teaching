@@ -1,8 +1,10 @@
 import './App.css'
 import Crud from './components/Crud'
+import CrudWithMongo from './components/CrudWithMongo'
 import PropsExample from './components/PropsExample'
 import ReactElements from './components/ReactElements'
 import StateExample from './components/StateExample'
+import UseEffectExample from './components/UseEffectExample'
 
 function App() {
   const data = [{
@@ -36,8 +38,10 @@ function App() {
       } */}
       {/* simple crud  */}
       {/* <StateExample/> */}
-      <Crud/>
+      {/* <Crud/> */}
       {/* <ReactElements/> */}
+      {/* <CrudWithMongo /> */}
+      <UseEffectExample/>
     </div>
   )
 }

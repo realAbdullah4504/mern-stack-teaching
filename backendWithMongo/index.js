@@ -37,6 +37,27 @@ app.post("/", async (req, res) => {
     res.json(newNote)
 })
 
+app.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    console.log("id", id)
+    const deleteNote = await Note.findByIdAndDelete(id)
+    res.json(deleteNote)
+})
+
+app.put("/:id", async (req, res) => {
+    const id = req.params.id;
+
+    const title = req.body.title;
+    const description = req.body.description;
+    console.log("title", title, "description", description)
+    const updateNote = await Note.findByIdAndUpdate(id, {
+        title,
+        description
+    }, { new: false })
+
+    res.json(updateNote);
+
+})
 
 mongoose.connect(mongoDbUri, {
     dbName: "notesDb"
