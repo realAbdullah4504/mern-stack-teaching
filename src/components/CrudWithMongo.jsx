@@ -20,20 +20,53 @@ const initialNotes = [
   },
 ];
 const CrudWithMongo = () => {
+  const url = "http://localhost:3000/";
   //todo app with adding and deleting the notes
   // we handle the one note and add it into the notes array
 
-  const [notes, setNotes] = useState(initialNotes);
+  const [notes, setNotes] = useState(null);
   const [editableNote, setEditableNote] = useState(null);
 
-  
+  const fetchNotes = async () => {
+    const response = await fetch(url);
+    const json = await response.json();
+    console.log("refresh", json);
+    setNotes(json);
+  };
 
-  const handleAddNote = (note) => {
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+
+  const handleAddNote = async (note) => {
     // console.log("note", note)
-    const id = notes.length + 1;
+    // const id = notes.length + 1;
+
+    // console.log(
+    //   "Json",
+    //   JSON.stringify(
+    //     { title: note.title, description: note.description },
+    //   ),
+    //   { title: note.title, description: note.description }
+    // );
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: note.title,
+        description: note.description
+      })
+    });
+
+    const data=await response.json()
+    console.log("new note",data)
+
     // const id=Math.random().toString(36).substring(2, 9); // generate a random id
-    const notesWithId = { ...note, id };
-    setNotes((previous) => [...previous, notesWithId]);
+    // const notesWithId = { ...note, id };
+    // setNotes((previous) => [...previous, notesWithId]);
   };
 
   const handleDeleteNote = (id) => {
@@ -50,10 +83,12 @@ const CrudWithMongo = () => {
   };
 
   const handleUpdateNote = (note) => {
-    console.log("handle update invoke",note)
-    const updateNote=notes.map((prevNote)=>prevNote.id===editableNote.id?note:prevNote)
-    setNotes(updateNote)
-    setEditableNote(null)
+    console.log("handle update invoke", note);
+    const updateNote = notes.map((prevNote) =>
+      prevNote.id === editableNote.id ? note : prevNote
+    );
+    setNotes(updateNote);
+    setEditableNote(null);
   };
 
   return (

@@ -26,6 +26,7 @@ app.get("/", async (req, res) => {
 })
 
 app.post("/", async (req, res) => {
+    console.log(req,res)
     const title = req.body.title;
     const description = req.body.description;
 

@@ -40,8 +40,8 @@ function App() {
       {/* <StateExample/> */}
       {/* <Crud/> */}
       {/* <ReactElements/> */}
-      {/* <CrudWithMongo /> */}
-      <UseEffectExample/>
+      <CrudWithMongo />
+      {/* <UseEffectExample/> */}
     </div>
   )
 }
